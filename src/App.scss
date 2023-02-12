@@ -1,0 +1,647 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == huge-screen {
+    @media (min-width: 2200px) {
+      @content;
+    }
+  }
+}
+
+@keyframes ifRollsSix {
+  0% {
+    color: inherit;
+  }
+
+  50% {
+    color: purple;
+    transform: scale(1.05);
+  }
+
+  100% {
+    color: inherit;
+  }
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Board {
+  width: 80rem;
+  height: 80rem;
+  border: 1px solid black;
+  margin-top: 5rem;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(11, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+
+  @include respond(phone) {
+    width: 60rem;
+    height: 60rem;
+  }
+
+  .Arrow {
+    width: 100%;
+    height: 100%;
+    font-size: 5rem;
+
+    @include respond(phone) {
+      font-size: 3rem;
+    }
+
+    &--1 {
+      grid-area: 4 / 1 / 5 / 2;
+      color: red;
+      margin-bottom: -60%;
+    }
+
+    &--2 {
+      grid-area: 1 / 8 / 2 / 9;
+      color: orange;
+      margin-left: -60%;
+    }
+
+    &--3 {
+      grid-area: 11 / 4 / 12 / 5;
+      color: green;
+      margin-right: -60%;
+    }
+
+    &--4 {
+      grid-area: 8 / 11 / 9 / 12;
+      color: blue;
+      margin-top: -60%;
+    }
+  }
+
+  .Button {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+
+    &__Start {
+      grid-area: 4 / 8 / 5 / 10;
+
+      @include respond(phone) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__Roll {
+      grid-area: 8 / 8 / 9 / 10;
+      font-size: 2.5rem;
+
+      @include respond(phone) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__New {
+      grid-area: 9 / 8 / 10 / 10;
+      font-size: 1.7rem;
+
+      @include respond(phone) {
+        font-size: 1rem;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--1 {
+      background-color: red;
+    }
+
+    &--2 {
+      background-color: orange;
+    }
+
+    &--3 {
+      background-color: green;
+    }
+
+    &--4 {
+      background-color: blue;
+    }
+  }
+
+  .Dice {
+    grid-area: 8 / 3 / 10 / 5;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+    & > * {
+      font-size: 10rem;
+    }
+
+    &--1 {
+      color: red;
+    }
+
+    &--2 {
+      color: orange;
+    }
+
+    &--3 {
+      color: green;
+    }
+
+    &--4 {
+      color: blue;
+    }
+  }
+
+  .Piece {
+    clip-path: polygon(
+      40% 0%,
+      30% 10%,
+      30% 20%,
+      40% 30%,
+      10% 80%,
+      90% 80%,
+      60% 30%,
+      70% 20%,
+      70% 10%,
+      60% 0%
+    );
+    width: 60%;
+    height: 60%;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__Player1 {
+      background: radial-gradient(red, black);
+
+      &--1 {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+
+      &--2 {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+
+      &--3 {
+        grid-area: 2 / 1 / 3 / 2;
+      }
+
+      &--4 {
+        grid-area: 2 / 2 / 3 / 3;
+      }
+    }
+
+    &__Player2 {
+      background: radial-gradient(orange, black);
+
+      &--1 {
+        grid-area: 1 / 10 / 2 / 11;
+      }
+
+      &--2 {
+        grid-area: 1 / 11 / 2 / 12;
+      }
+
+      &--3 {
+        grid-area: 2 / 10 / 3 / 11;
+      }
+
+      &--4 {
+        grid-area: 2 / 11 / 3 / 12;
+      }
+    }
+
+    &__Player3 {
+      background: radial-gradient(green, black);
+
+      &--1 {
+        grid-area: 10 / 1 / 11 / 2;
+      }
+
+      &--2 {
+        grid-area: 10 / 2 / 11 / 3;
+      }
+
+      &--3 {
+        grid-area: 11 / 1 / 12 / 2;
+      }
+
+      &--4 {
+        grid-area: 11 / 2 / 12 / 3;
+      }
+    }
+
+    &__Player4 {
+      background: radial-gradient(blue, black);
+
+      &--1 {
+        grid-area: 10 / 10 / 11 / 11;
+      }
+
+      &--2 {
+        grid-area: 10 / 11 / 11 / 12;
+      }
+
+      &--3 {
+        grid-area: 11 / 10 / 12 / 11;
+      }
+
+      &--4 {
+        grid-area: 11 / 11 / 12 / 12;
+      }
+    }
+  }
+
+  .Field {
+    width: 90%;
+    height: 90%;
+    border-radius: 10rem;
+
+    &__Default {
+      border: 2px solid black;
+
+      @include respond(tab-port) {
+        border: 1px solid black;
+      }
+
+      &--1 {
+        grid-area: 5 / 1 / 6 / 2;
+      }
+
+      &--2 {
+        grid-area: 5 / 2 / 6 / 3;
+      }
+
+      &--3 {
+        grid-area: 5 / 3 / 6 / 4;
+      }
+
+      &--4 {
+        grid-area: 5 / 4 / 6 / 5;
+      }
+
+      &--5 {
+        grid-area: 5 / 5 / 6 / 6;
+      }
+
+      &--6 {
+        grid-area: 4 / 5 / 5 / 6;
+      }
+
+      &--7 {
+        grid-area: 3 / 5 / 4 / 6;
+      }
+
+      &--8 {
+        grid-area: 2 / 5 / 3 / 6;
+      }
+
+      &--9 {
+        grid-area: 1 / 5 / 2 / 6;
+      }
+
+      &--10 {
+        grid-area: 1 / 6 / 2 / 7;
+      }
+
+      &--11 {
+        grid-area: 1 / 7 / 2 / 8;
+      }
+
+      &--12 {
+        grid-area: 2 / 7 / 3 / 8;
+      }
+
+      &--13 {
+        grid-area: 3 / 7 / 4 / 8;
+      }
+
+      &--14 {
+        grid-area: 4 / 7 / 5 / 8;
+      }
+
+      &--15 {
+        grid-area: 5 / 7 / 6 / 8;
+      }
+
+      &--16 {
+        grid-area: 5 / 8 / 6 / 9;
+      }
+
+      &--17 {
+        grid-area: 5 / 9 / 6 / 10;
+      }
+
+      &--18 {
+        grid-area: 5 / 10 / 6 / 11;
+      }
+
+      &--19 {
+        grid-area: 5 / 11 / 6 / 12;
+      }
+
+      &--20 {
+        grid-area: 6 / 11 / 7 / 12;
+      }
+
+      &--21 {
+        grid-area: 7 / 11 / 8 / 12;
+      }
+
+      &--22 {
+        grid-area: 7 / 10 / 8 / 11;
+      }
+
+      &--23 {
+        grid-area: 7 / 9 / 8 / 10;
+      }
+
+      &--24 {
+        grid-area: 7 / 8 / 8 / 9;
+      }
+
+      &--25 {
+        grid-area: 7 / 7 / 8 / 8;
+      }
+
+      &--26 {
+        grid-area: 8 / 7 / 9 / 8;
+      }
+
+      &--27 {
+        grid-area: 9 / 7 / 10 / 8;
+      }
+
+      &--28 {
+        grid-area: 10 / 7 / 11 / 8;
+      }
+
+      &--29 {
+        grid-area: 11 / 7 / 12 / 8;
+      }
+
+      &--30 {
+        grid-area: 11 / 6 / 12 / 7;
+      }
+
+      &--31 {
+        grid-area: 11 / 5 / 12 / 6;
+      }
+
+      &--32 {
+        grid-area: 10 / 5 / 11 / 6;
+      }
+
+      &--33 {
+        grid-area: 9 / 5 / 10 / 6;
+      }
+
+      &--34 {
+        grid-area: 8 / 5 / 9 / 6;
+      }
+
+      &--35 {
+        grid-area: 7 / 5 / 8 / 6;
+      }
+
+      &--36 {
+        grid-area: 7 / 4 / 8 / 5;
+      }
+
+      &--37 {
+        grid-area: 7 / 3 / 8 / 4;
+      }
+
+      &--38 {
+        grid-area: 7 / 2 / 8 / 3;
+      }
+
+      &--39 {
+        grid-area: 7 / 1 / 8 / 2;
+      }
+
+      &--40 {
+        grid-area: 6 / 1 / 7 / 2;
+      }
+    }
+
+    &__Player1-StartingField {
+      border: 2px solid red;
+
+      &--1 {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+
+      &--2 {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+
+      &--3 {
+        grid-area: 2 / 1 / 3 / 2;
+      }
+
+      &--4 {
+        grid-area: 2 / 2 / 3 / 3;
+      }
+    }
+
+    &__Player1-FinishingField {
+      background-color: red;
+
+      &--1 {
+        grid-area: 6 / 2 / 7 / 3;
+      }
+
+      &--2 {
+        grid-area: 6 / 3 / 7 / 4;
+      }
+
+      &--3 {
+        grid-area: 6 / 4 / 7 / 5;
+      }
+
+      &--4 {
+        grid-area: 6 / 5 / 7 / 6;
+      }
+    }
+
+    &__Player2-StartingField {
+      border: 2px solid orange;
+
+      &--1 {
+        grid-area: 1 / 10 / 2 / 11;
+      }
+
+      &--2 {
+        grid-area: 1 / 11 / 2 / 12;
+      }
+
+      &--3 {
+        grid-area: 2 / 10 / 3 / 11;
+      }
+
+      &--4 {
+        grid-area: 2 / 11 / 3 / 12;
+      }
+    }
+
+    &__Player2-FinishingField {
+      background-color: orange;
+
+      &--1 {
+        grid-area: 2 / 6 / 3 / 7;
+      }
+
+      &--2 {
+        grid-area: 3 / 6 / 4 / 7;
+      }
+
+      &--3 {
+        grid-area: 4 / 6 / 5 / 7;
+      }
+
+      &--4 {
+        grid-area: 5 / 6 / 6 / 7;
+      }
+    }
+
+    &__Player3-StartingField {
+      border: 2px solid green;
+
+      &--1 {
+        grid-area: 10 / 1 / 11 / 2;
+      }
+
+      &--2 {
+        grid-area: 10 / 2 / 11 / 3;
+      }
+
+      &--3 {
+        grid-area: 11 / 1 / 12 / 2;
+      }
+
+      &--4 {
+        grid-area: 11 / 2 / 12 / 3;
+      }
+    }
+
+    &__Player3-FinishingField {
+      background-color: green;
+
+      &--1 {
+        grid-area: 10 / 6 / 11 / 7;
+      }
+
+      &--2 {
+        grid-area: 9 / 6 / 10 / 7;
+      }
+
+      &--3 {
+        grid-area: 8 / 6 / 9 / 7;
+      }
+
+      &--4 {
+        grid-area: 7 / 6 / 8 / 7;
+      }
+    }
+
+    &__Player4-StartingField {
+      border: 2px solid blue;
+
+      &--1 {
+        grid-area: 10 / 10 / 11 / 11;
+      }
+
+      &--2 {
+        grid-area: 10 / 11 / 11 / 12;
+      }
+
+      &--3 {
+        grid-area: 11 / 10 / 12 / 11;
+      }
+
+      &--4 {
+        grid-area: 11 / 11 / 12 / 12;
+      }
+    }
+
+    &__Player4-FinishingField {
+      background-color: blue;
+
+      &--1 {
+        grid-area: 6 / 10 / 7 / 11;
+      }
+
+      &--2 {
+        grid-area: 6 / 9 / 7 / 10;
+      }
+
+      &--3 {
+        grid-area: 6 / 8 / 7 / 9;
+      }
+
+      &--4 {
+        grid-area: 6 / 7 / 7 / 8;
+      }
+    }
+  }
+
+  .Announcement {
+    grid-area: 4 / 2 / 5 / 5;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: red;
+  }
+
+  .PlayerSelection {
+    grid-area: 4 / 3 / 5 / 5;
+  }
+
+  .HumanCheck {
+    grid-area: 1 / 3 / 3 / 5;
+  }
+}
+
+.Disabled {
+  display: none;
+}
+
+.NoClick {
+  pointer-events: none;
+}
+
+.NoClickButton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.PlayAnimation {
+  animation: ifRollsSix 2s infinite;
+}
