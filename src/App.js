@@ -383,48 +383,56 @@ function App() {
         </div>
         {/* Human-AI check */}
         {/* <div className={`HumanCheck ${inProgress && "Disabled"}`}>
-          <label htmlFor="player1">Player 1:</label>
-          <select
-            name="player1"
-            id="player1"
-            value={humanCheck[0]}
-            onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
-            onClick={() => dispatch(playerActions.togglePlayerState(1))}>
-            <option value={true}>Human</option>
-            <option value={false}>Computer</option>
-          </select>
-          <label htmlFor="player2">Player 2:</label>
-          <select
-            name="player2"
-            id="player2"
-            value={humanCheck[1]}
-            onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
-            onClick={() => dispatch(playerActions.togglePlayerState(2))}>
-            <option value={true}>Human</option>
-            <option value={false}>Computer</option>
-          </select>
-          <label htmlFor="player3">Player 3:</label>
-          <select
-            name="player3"
-            id="player3"
-            value={humanCheck[2]}
-            onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
-            onClick={() => dispatch(playerActions.togglePlayerState(3))}
-            className={numberOfPlayers === 2 ? "Disabled" : ""}>
-            <option value={true}>Human</option>
-            <option value={false}>Computer</option>
-          </select>
-          <label htmlFor="player4">Player 4:</label>
-          <select
-            name="player4"
-            id="player4"
-            value={humanCheck[3]}
-            onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
-            onClick={() => dispatch(playerActions.togglePlayerState(4))}
-            className={numberOfPlayers !== 4 ? "Disabled" : ""}>
-            <option value="Human">Human</option>
-            <option value="Computer">Computer</option>
-          </select>
+          <div className="HumanCheck__Holder">
+            <label htmlFor="player1">Player 1:</label>
+            <select
+              name="player1"
+              id="player1"
+              value={humanCheck[0]}
+              onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
+              onClick={() => dispatch(playerActions.togglePlayerState(1))}>
+              <option value={true}>Human</option>
+              <option value={true}>Human</option>
+            </select>
+          </div>
+          <div className="HumanCheck__Holder">
+            <label htmlFor="player2">Player 2:</label>
+            <select
+              name="player2"
+              id="player2"
+              value={humanCheck[1]}
+              onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
+              onClick={() => dispatch(playerActions.togglePlayerState(2))}>
+              <option value={true}>Human</option>
+              <option value={false}>Computer</option>
+            </select>
+          </div>
+          <div className="HumanCheck__Holder">
+            <label htmlFor="player3">Player 3:</label>
+            <select
+              name="player3"
+              id="player3"
+              value={humanCheck[2]}
+              onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
+              onClick={() => dispatch(playerActions.togglePlayerState(3))}
+              className={numberOfPlayers === 2 ? "Disabled" : ""}>
+              <option value={true}>Human</option>
+              <option value={false}>Computer</option>
+            </select>
+          </div>
+          <div className="HumanCheck__Holder">
+            <label htmlFor="player4">Player 4:</label>
+            <select
+              name="player4"
+              id="player4"
+              value={humanCheck[3]}
+              onChange={(e) => dispatch(playerActions.toggleHuman(e.target.value))}
+              onClick={() => dispatch(playerActions.togglePlayerState(4))}
+              className={numberOfPlayers !== 4 ? "Disabled" : ""}>
+              <option value={true}>Human</option>
+              <option value={false}>Computer</option>
+            </select>
+          </div>
         </div> */}
       </div>
     </div>

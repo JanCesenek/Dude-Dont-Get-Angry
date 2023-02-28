@@ -48,80 +48,93 @@ const playerSlice = createSlice({
       const moveSound = () => new Audio(movePiece).play();
       const captureSound = () => new Audio(capturePiece).play();
       const resetSound = () => new Audio(resetPieces).play();
-      // Skip player count
-      let skipPlayerCount = 1;
-      // Resets sounds
-      state.sound = [false, false];
-      // Sets some variables first
-      const allPieces = state.positionOfAllPieces;
-      const curPlayer = state.positionOfAllPieces[state.playerTurn - 1];
-      // Checks the number of players for the game
-      const endTurn = (arg) => {
-        if (state.playerTurn + arg > state.numberOfPlayers) {
-          state.playerTurn = (state.playerTurn + arg) % state.numberOfPlayers;
-        } else if (state.playerTurn + arg === state.numberOfPlayers) {
-          state.playerTurn = state.numberOfPlayers;
-        } else {
-          state.playerTurn += arg;
-        }
-      };
-      console.log(state.numberOfPlayers, state.playerTurn);
-      // Checks the state of the next player turn
-      const nextPlayerCheck = () => (state.playerTurn === 4 ? 0 : state.playerTurn);
-      const nextPlayer = allPieces[nextPlayerCheck()];
-      // Checks the state of the player two turns ahead in case if eg. only players 1 and 4 remained in the game, only valid for 4-player version
-      const twoTurnsAheadCheck = () => {
-        if (state.playerTurn === 4) {
-          return 1;
-        } else if (state.playerTurn === 3) {
-          return 0;
-        } else return state.playerTurn + 1;
-      };
-      const twoTurnsAheadPlayer = allPieces[twoTurnsAheadCheck()];
-      // Variables checking finishing fields for current player
-      const if44 = curPlayer.some((el) => el === 44);
-      const if43 = curPlayer.some((el) => el === 43);
-      const if42 = curPlayer.some((el) => el === 42);
-      // Variables checking if next player is finished
-      const ifNext44 = nextPlayer.some((el) => el === 44);
-      const ifNext43 = nextPlayer.some((el) => el === 43);
-      const ifNext42 = nextPlayer.some((el) => el === 42);
-      const ifNext41 = nextPlayer.some((el) => el === 41);
-      const nextFinished = ifNext44 && ifNext43 && ifNext42 && ifNext41;
-      // Variables checking if the player 2 turns ahead is finished
-      const ifTwoTurnsAhead44 = twoTurnsAheadPlayer.some((el) => el === 44);
-      const ifTwoTurnsAhead43 = twoTurnsAheadPlayer.some((el) => el === 43);
-      const ifTwoTurnsAhead42 = twoTurnsAheadPlayer.some((el) => el === 42);
-      const ifTwoTurnsAhead41 = twoTurnsAheadPlayer.some((el) => el === 41);
-      const twoTurnsAheadFinished =
-        ifTwoTurnsAhead44 && ifTwoTurnsAhead43 && ifTwoTurnsAhead42 && ifTwoTurnsAhead41;
-      // Adds check if the next turn or the player two turns ahead already finished
-      if (nextFinished) {
-        console.log(nextFinished, twoTurnsAheadFinished);
-        skipPlayerCount++;
-        if (state.playerTurn > state.numberOfPlayers) {
-          state.playerTurn = state.playerTurn % state.numberOfPlayers;
-        }
-        if (twoTurnsAheadFinished) {
+
+      // -----------------------------------------------------------
+      // ----------- Moving rules in an arrow function -------------
+      const updateFunction = (arg) => {
+        // Some duplicate variables because of AI rule
+        const nextPlayerCheck = () => (state.playerTurn === 4 ? 0 : state.playerTurn);
+        const nextPlayerHumanCheck = state.humanCheck[nextPlayerCheck()];
+        // Skip player count
+        let skipPlayerCount = 1;
+        // Resets sounds
+        state.sound = [false, false];
+        // Sets some variables first
+        const allPieces = state.positionOfAllPieces;
+        const curPlayer = state.positionOfAllPieces[state.playerTurn - 1];
+        // Checks the number of players for the game
+        const endTurn = (arg) => {
+          if (state.playerTurn + arg > state.numberOfPlayers) {
+            state.playerTurn = (state.playerTurn + arg) % state.numberOfPlayers;
+          } else if (state.playerTurn + arg === state.numberOfPlayers) {
+            state.playerTurn = state.numberOfPlayers;
+          } else {
+            state.playerTurn += arg;
+          }
+        };
+        console.log(state.numberOfPlayers, state.playerTurn);
+        // Checks the state of the next player turn
+        const nextPlayer = allPieces[nextPlayerCheck()];
+        // Checks the state of the player two turns ahead in case if eg. only players 1 and 4 remained in the game, only valid for 4-player version
+        const twoTurnsAheadCheck = () => {
+          if (state.playerTurn === 4) {
+            return 1;
+          } else if (state.playerTurn === 3) {
+            return 0;
+          } else return state.playerTurn + 1;
+        };
+        const twoTurnsAheadPlayer = allPieces[twoTurnsAheadCheck()];
+        // Variables checking finishing fields for current player
+        const if44 = curPlayer.some((el) => el === 44);
+        const if43 = curPlayer.some((el) => el === 43);
+        const if42 = curPlayer.some((el) => el === 42);
+        // Variables checking if next player is finished
+        const ifNext44 = nextPlayer.some((el) => el === 44);
+        const ifNext43 = nextPlayer.some((el) => el === 43);
+        const ifNext42 = nextPlayer.some((el) => el === 42);
+        const ifNext41 = nextPlayer.some((el) => el === 41);
+        const nextFinished = ifNext44 && ifNext43 && ifNext42 && ifNext41;
+        // Variables checking if the player 2 turns ahead is finished
+        const ifTwoTurnsAhead44 = twoTurnsAheadPlayer.some((el) => el === 44);
+        const ifTwoTurnsAhead43 = twoTurnsAheadPlayer.some((el) => el === 43);
+        const ifTwoTurnsAhead42 = twoTurnsAheadPlayer.some((el) => el === 42);
+        const ifTwoTurnsAhead41 = twoTurnsAheadPlayer.some((el) => el === 41);
+        const twoTurnsAheadFinished =
+          ifTwoTurnsAhead44 && ifTwoTurnsAhead43 && ifTwoTurnsAhead42 && ifTwoTurnsAhead41;
+        // Adds check if the next turn or the player two turns ahead already finished
+        if (nextFinished) {
+          console.log(nextFinished, twoTurnsAheadFinished);
           skipPlayerCount++;
           if (state.playerTurn > state.numberOfPlayers) {
             state.playerTurn = state.playerTurn % state.numberOfPlayers;
           }
+          if (twoTurnsAheadFinished) {
+            skipPlayerCount++;
+            if (state.playerTurn > state.numberOfPlayers) {
+              state.playerTurn = state.playerTurn % state.numberOfPlayers;
+            }
+          }
         }
-      }
-      // Dynamically sets the endpoint for moving
-      const highestNumber = () => {
-        if (if44 && if43 && if42) {
-          return 41;
-        } else if (if44 && if43) {
-          return 42;
-        } else if (if44) {
-          return 43;
-        } else return 44;
-      };
-      // -----------------------------------------------------------
-      // ----------- Moving rules in an arrow function -------------
-      const updateFunction = (arg) => {
+        // Dynamically sets the endpoint for moving
+        const highestNumber = () => {
+          if (if44 && if43 && if42) {
+            return 41;
+          } else if (if44 && if43) {
+            return 42;
+          } else if (if44) {
+            return 43;
+          } else return 44;
+        };
+        // Next player highest number
+        const nextPlayerHighestNumber = () => {
+          if (ifNext44 && ifNext43 && ifNext42) {
+            return 41;
+          } else if (ifNext44 && ifNext43) {
+            return 42;
+          } else if (ifNext44) {
+            return 43;
+          } else return 44;
+        };
         const curIndex = curPlayer.findIndex((el) => el !== 0 && el <= highestNumber());
         const captureCheck = (dynamicNumber) =>
           allPieces.forEach((el, i) => {
@@ -166,13 +179,18 @@ const playerSlice = createSlice({
           });
         // -------------- DICE!!! -------------------------
         // Rolls the dice, if not selecting pieces
-        if (action.payload === "New" || action.payload === "Roll") {
-          state.animation = true;
+        if (
+          action.payload === "New" ||
+          action.payload === "Roll" ||
+          arg === "New" ||
+          arg === "Roll"
+        ) {
           state.curDice = Math.floor(Math.random() * 6 + 1);
+          state.curDice = 1;
         }
         // ------------------------------------------------
         // Checks if its possible for player to make a move, his own pieces in the finishing field can be in the way
-        if (action.payload !== "New") {
+        if (action.payload !== "New" || (arg && arg !== "New")) {
           const curPlayerOccurences = curPlayer.every(
             (el) =>
               el + state.curDice > highestNumber() ||
@@ -208,7 +226,7 @@ const playerSlice = createSlice({
         }
         // ---------------------------------------------------------------------------
         // --------------- ROLL A DICE + MOVE A PIECE - 1 OPTION ---------------------
-        if (action.payload === "Roll") {
+        if (action.payload === "Roll" || arg === "Roll") {
           console.log(counts.length);
           console.log(counts);
           // ------------- Update state repeat ---------------
@@ -310,7 +328,7 @@ const playerSlice = createSlice({
         }
         // ------------------------------------------------------------
         // ------------------- ADDING NEW PIECE -----------------------
-        else if (action.payload === "New") {
+        else if (action.payload === "New" || arg === "New") {
           // Finds your first piece in home field
           const newPiece = curPlayer.indexOf(0);
           // Rolls the dice
@@ -339,7 +357,11 @@ const playerSlice = createSlice({
         // ------------------------------------------------------------------
         // ------------- MORE PIECES TO MOVE WITH ---------------------------
         else {
-          state.animation = false;
+          const humanCheck = state.humanCheck[state.playerTurn - 1];
+          if (humanCheck === "false") {
+            const randNum = Math.floor(Math.random() * counts.length + 1);
+            action.payload = counts[randNum - 1];
+          }
           const curIndex = curPlayer.indexOf(action.payload);
           console.log(curIndex);
           // If a player clicks on an inactive piece, or on a piece which can't move due to high dice roll, or which would capture your other piece, return, as it can't be moved
@@ -389,27 +411,71 @@ const playerSlice = createSlice({
         }
         if (state.sound[1]) captureSound();
         else if (state.sound[0]) moveSound();
+        // Checks for AI on the next turn
+        if (nextPlayerHumanCheck === "false") {
+          // If you can either move with your existing piece or add a new piece, there is a 25% chance AI will try to add a new piece and 75% it will move with an existing piece
+          const randNum = Math.floor(Math.random() * 4 + 1);
+          // Code for AI trying to add a new piece
+          if (
+            (nextPlayer.every((el) => el !== 1) &&
+              nextPlayer.some((el) => el === 0) &&
+              randNum === 4) ||
+            (nextPlayer.every((el) => el !== 1) && nextPlayer.some((el) => el === 0))
+          ) {
+            for (let i = 1; i < 4; i++) {
+              updateFunction("New");
+              if (state.curDice === 6) {
+                updateFunction("Roll");
+                break;
+              }
+            }
+          } else if (
+            (nextPlayer.some((el) => el !== 0 || el < nextPlayerHighestNumber()) &&
+              randNum !== 4) ||
+            nextPlayer.some((el) => el !== 0 || el < nextPlayerHighestNumber())
+          ) {
+            updateFunction("Roll");
+          }
+        }
       };
-      if (action.payload !== "Toggle") updateFunction();
+      // -----------------------------------------------------------
+      // ----------------- START-RESET GAME TOGGLE -----------------
       if (action.payload === "Toggle") {
         // If a game is in progress, reset
         if (state.inProgress) {
           if (window.confirm("Really want to reset the game and lose progress?")) {
-            state.positionOfAllPieces = [
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-            ];
-            console.log(curPlayer);
             state.curDice = 0;
             resetSound();
           } else return;
         }
+        if (state.numberOfPlayers === 4) {
+          state.positionOfAllPieces = [
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+          ];
+        } else if (state.numberOfPlayers === 3) {
+          state.positionOfAllPieces = [
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+            [0, 0, 0, 0],
+          ];
+        } else if (state.numberOfPlayers === 2) {
+          state.positionOfAllPieces = [
+            [1, 0, 0, 0],
+            [1, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+          ];
+        }
         // Change state
         state.inProgress = !state.inProgress;
         state.playerTurn = 1;
+        return;
       }
+      updateFunction();
     },
     toggleHuman(state, action) {
       state.humanCheck[state.playerTurn - 1] = action.payload;

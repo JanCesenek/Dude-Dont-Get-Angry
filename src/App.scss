@@ -626,6 +626,11 @@
 
   .HumanCheck {
     grid-area: 1 / 3 / 3 / 5;
+
+    &__Holder {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
