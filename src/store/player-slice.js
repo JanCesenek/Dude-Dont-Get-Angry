@@ -186,7 +186,6 @@ const playerSlice = createSlice({
           arg === "Roll"
         ) {
           state.curDice = Math.floor(Math.random() * 6 + 1);
-          state.curDice = 1;
         }
         // ------------------------------------------------
         // Checks if its possible for player to make a move, his own pieces in the finishing field can be in the way
