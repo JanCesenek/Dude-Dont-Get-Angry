@@ -193,36 +193,28 @@ function App() {
           } Field__Player1-FinishingField--${player1[0] - 40} ${
             (playerTurn !== 1 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player1[0])}>
-          1
-        </div>
+          onClick={() => makeTurn(player1[0])}></div>
         <div
           className={`Piece Piece__Player1 Piece__Player1--2 Field__Default--${
             player1[1]
           } Field__Player1-FinishingField--${player1[1] - 40} ${
             (playerTurn !== 1 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player1[1])}>
-          2
-        </div>
+          onClick={() => makeTurn(player1[1])}></div>
         <div
           className={`Piece Piece__Player1 Piece__Player1--3 Field__Default--${
             player1[2]
           } Field__Player1-FinishingField--${player1[2] - 40} ${
             (playerTurn !== 1 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player1[2])}>
-          3
-        </div>
+          onClick={() => makeTurn(player1[2])}></div>
         <div
           className={`Piece Piece__Player1 Piece__Player1--4 Field__Default--${
             player1[3]
           } Field__Player1-FinishingField--${player1[3] - 40} ${
             (playerTurn !== 1 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player1[3])}>
-          4
-        </div>
+          onClick={() => makeTurn(player1[3])}></div>
         {/* Player 2 Pieces */}
         <div
           className={`Piece Piece__Player2 Piece__Player2--1 Field__Default--${
@@ -230,36 +222,28 @@ function App() {
           } Field__Player2-FinishingField--${player2[0] - 40} ${
             (playerTurn !== 2 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player2[0])}>
-          1
-        </div>
+          onClick={() => makeTurn(player2[0])}></div>
         <div
           className={`Piece Piece__Player2 Piece__Player2--2 Field__Default--${
             player2[1] !== 0 && ((player2[1] + 10) % 40 === 0 ? 40 : (player2[1] + 10) % 40)
           } Field__Player2-FinishingField--${player2[1] - 40} ${
             (playerTurn !== 2 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player2[1])}>
-          2
-        </div>
+          onClick={() => makeTurn(player2[1])}></div>
         <div
           className={`Piece Piece__Player2 Piece__Player2--3 Field__Default--${
             player2[2] !== 0 && ((player2[2] + 10) % 40 === 0 ? 40 : (player2[2] + 10) % 40)
           } Field__Player2-FinishingField--${player2[2] - 40} ${
             (playerTurn !== 2 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player2[2])}>
-          3
-        </div>
+          onClick={() => makeTurn(player2[2])}></div>
         <div
           className={`Piece Piece__Player2 Piece__Player2--4 Field__Default--${
             player2[3] !== 0 && ((player2[3] + 10) % 40 === 0 ? 40 : (player2[3] + 10) % 40)
           } Field__Player2-FinishingField--${player2[3] - 40} ${
             (playerTurn !== 2 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"}`}
-          onClick={() => makeTurn(player2[3])}>
-          4
-        </div>
+          onClick={() => makeTurn(player2[3])}></div>
         {/* Player 3 Pieces */}
         <div
           className={`Piece Piece__Player3 Piece__Player3--1 Field__Default--${
@@ -267,36 +251,28 @@ function App() {
           } Field__Player3-FinishingField--${player3[0] - 40} ${
             (playerTurn !== 3 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers === 2 && "Disabled"}`}
-          onClick={() => makeTurn(player3[0])}>
-          1
-        </div>
+          onClick={() => makeTurn(player3[0])}></div>
         <div
           className={`Piece Piece__Player3 Piece__Player3--2 Field__Default--${
             player3[1] !== 0 && ((player3[1] + 30) % 40 === 0 ? 40 : (player3[1] + 30) % 40)
           } Field__Player3-FinishingField--${player3[1] - 40} ${
             (playerTurn !== 3 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers === 2 && "Disabled"}`}
-          onClick={() => makeTurn(player3[1])}>
-          2
-        </div>
+          onClick={() => makeTurn(player3[1])}></div>
         <div
           className={`Piece Piece__Player3 Piece__Player3--3 Field__Default--${
             player3[2] !== 0 && ((player3[2] + 30) % 40 === 0 ? 40 : (player3[2] + 30) % 40)
           } Field__Player3-FinishingField--${player3[2] - 40} ${
             (playerTurn !== 3 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers === 2 && "Disabled"}`}
-          onClick={() => makeTurn(player3[2])}>
-          3
-        </div>
+          onClick={() => makeTurn(player3[2])}></div>
         <div
           className={`Piece Piece__Player3 Piece__Player3--4 Field__Default--${
             player3[3] !== 0 && ((player3[3] + 30) % 40 === 0 ? 40 : (player3[3] + 30) % 40)
           } Field__Player3-FinishingField--${player3[3] - 40} ${
             (playerTurn !== 3 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers === 2 && "Disabled"}`}
-          onClick={() => makeTurn(player3[3])}>
-          4
-        </div>
+          onClick={() => makeTurn(player3[3])}></div>
         {/* Player 4 Pieces */}
         <div
           className={`Piece Piece__Player4 Piece__Player4--1 Field__Default--${
@@ -304,36 +280,28 @@ function App() {
           } Field__Player4-FinishingField--${player4[0] - 40} ${
             (playerTurn !== 4 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers !== 4 && "Disabled"}`}
-          onClick={() => makeTurn(player4[0])}>
-          1
-        </div>
+          onClick={() => makeTurn(player4[0])}></div>
         <div
           className={`Piece Piece__Player4 Piece__Player4--2 Field__Default--${
             player4[1] !== 0 && ((player4[1] + 20) % 40 === 0 ? 40 : (player4[1] + 20) % 40)
           } Field__Player4-FinishingField--${player4[1] - 40} ${
             (playerTurn !== 4 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers !== 4 && "Disabled"}`}
-          onClick={() => makeTurn(player4[1])}>
-          2
-        </div>
+          onClick={() => makeTurn(player4[1])}></div>
         <div
           className={`Piece Piece__Player4 Piece__Player4--3 Field__Default--${
             player4[2] !== 0 && ((player4[2] + 20) % 40 === 0 ? 40 : (player4[2] + 20) % 40)
           } Field__Player4-FinishingField--${player4[2] - 40} ${
             (playerTurn !== 4 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers !== 4 && "Disabled"}`}
-          onClick={() => makeTurn(player4[2])}>
-          3
-        </div>
+          onClick={() => makeTurn(player4[2])}></div>
         <div
           className={`Piece Piece__Player4 Piece__Player4--4 Field__Default--${
             player4[3] !== 0 && ((player4[3] + 20) % 40 === 0 ? 40 : (player4[3] + 20) % 40)
           } Field__Player4-FinishingField--${player4[3] - 40} ${
             (playerTurn !== 4 || pieceHidden) && "NoClick"
           } ${!inProgress && "NoClickButton"} ${numberOfPlayers !== 4 && "Disabled"}`}
-          onClick={() => makeTurn(player4[3])}>
-          4
-        </div>
+          onClick={() => makeTurn(player4[3])}></div>
         {/* Dice */}
         <div className={`Dice Dice--${diceColor} ${diceNumber === 6 && "PlayAnimation"}`}>
           {!toggleDice && diceNumberDisplay()}
